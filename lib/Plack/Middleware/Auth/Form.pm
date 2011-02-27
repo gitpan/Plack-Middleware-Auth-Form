@@ -2,10 +2,8 @@ use strict;
 use warnings;
 package Plack::Middleware::Auth::Form;
 BEGIN {
-  $Plack::Middleware::Auth::Form::VERSION = '0.001';
+  $Plack::Middleware::Auth::Form::VERSION = '0.002';
 }
-
-use feature ':5.10';
 
 use parent qw/Plack::Middleware/;
 use Plack::Util::Accessor qw( secure authenticator no_login_page after_logout );
@@ -47,7 +45,7 @@ sub _login {
     my($self, $env) = @_;
     my $login_error;
     if( $self->secure && $env->{'psgi.url_scheme'} ne 'https' ){
-        my $server = $env->{X_FORWARDED_FOR} // $env->{X_HTTP_HOST} // $env->{SERVER_NAME};
+        my $server = $env->{X_FORWARDED_FOR} || $env->{X_HTTP_HOST} || $env->{SERVER_NAME};
         my $secure_url = "https://$server" . $env->{PATH_INFO};
         return [ 
             301, 
@@ -109,7 +107,7 @@ sub _render_form {
     if( $params{login_error} ){
         $out .= qq{<div class="error">$params{login_error}</div>};
     }
-    my $username = $params{username} // '';
+    my $username = defined $params{username} ? $params{username} : '';
     $out .= <<END;
 <form id="login_form" method="post" > 
   <fieldset class="main_fieldset"> 
@@ -147,7 +145,7 @@ Plack::Middleware::Auth::Form - Form Based Authentication for Plack (think Catal
 
 =head1 VERSION
 
-version 0.001
+version 0.002
 
 =head1 SYNOPSIS
 
