@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package Plack::Middleware::Auth::Form;
 BEGIN {
-  $Plack::Middleware::Auth::Form::VERSION = '0.002';
+  $Plack::Middleware::Auth::Form::VERSION = '0.003';
 }
 
 use parent qw/Plack::Middleware/;
@@ -141,11 +141,11 @@ sub _logout {
 
 =head1 NAME
 
-Plack::Middleware::Auth::Form - Form Based Authentication for Plack (think CatalystX::Simple)
+Plack::Middleware::Auth::Form - Form Based Authentication for Plack (think CatalystX::LoginSimple)
 
 =head1 VERSION
 
-version 0.002
+version 0.003
 
 =head1 SYNOPSIS
 
@@ -228,5 +228,5 @@ This is free software, licensed under:
 
 __END__
 
-# ABSTRACT: Form Based Authentication for Plack (think CatalystX::Simple)
+# ABSTRACT: Form Based Authentication for Plack (think CatalystX::LoginSimple)
 

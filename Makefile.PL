@@ -9,7 +9,7 @@ use ExtUtils::MakeMaker 6.31;
 
 
 my %WriteMakefileArgs = (
-  'ABSTRACT' => 'Form Based Authentication for Plack (think CatalystX::Simple)',
+  'ABSTRACT' => 'Form Based Authentication for Plack (think CatalystX::LoginSimple)',
   'AUTHOR' => 'Zbigniew Lukasiak <zby@cpan.org>',
   'BUILD_REQUIRES' => {
     'Data::Dumper' => '0',
@@ -30,7 +30,7 @@ my %WriteMakefileArgs = (
     'Scalar::Util' => '0',
     'parent' => '0'
   },
-  'VERSION' => '0.002',
+  'VERSION' => '0.003',
   'test' => {
     'TESTS' => 't/*.t'
   }
