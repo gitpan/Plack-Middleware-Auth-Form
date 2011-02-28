@@ -8,3 +8,7 @@ Revision history for Plack::Middleware::Auth::Form.
 
 0.004     2011-02-27
     Minor doc fix.
+    
+0.005     2011-02-28
+    File::Spec to get the app.psgi file in tests.
+

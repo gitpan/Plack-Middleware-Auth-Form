@@ -4,6 +4,7 @@ author:
   - 'Zbigniew Lukasiak <zby@cpan.org>'
 build_requires:
   Data::Dumper: 0
+  File::Spec: 0
   Test::More: 0
   Test::WWW::Mechanize::PSGI: 0
 configure_requires:
@@ -27,4 +28,4 @@ requires:
   Scalar::Util: 0
   parent: 0
 resources: {}
-version: 0.004
+version: 0.005

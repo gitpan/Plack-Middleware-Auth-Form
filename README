@@ -1,7 +1,7 @@
 
 
 This archive contains the distribution Plack-Middleware-Auth-Form,
-version 0.004:
+version 0.005:
 
   Form Based Authentication for Plack (think CatalystX::SimpleLogin)
 

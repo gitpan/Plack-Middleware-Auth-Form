@@ -13,6 +13,7 @@ my %WriteMakefileArgs = (
   'AUTHOR' => 'Zbigniew Lukasiak <zby@cpan.org>',
   'BUILD_REQUIRES' => {
     'Data::Dumper' => '0',
+    'File::Spec' => '0',
     'Test::More' => '0',
     'Test::WWW::Mechanize::PSGI' => '0'
   },
@@ -30,7 +31,7 @@ my %WriteMakefileArgs = (
     'Scalar::Util' => '0',
     'parent' => '0'
   },
-  'VERSION' => '0.004',
+  'VERSION' => '0.005',
   'test' => {
     'TESTS' => 't/*.t'
   }
