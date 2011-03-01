@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package Plack::Middleware::Auth::Form;
 BEGIN {
-  $Plack::Middleware::Auth::Form::VERSION = '0.005';
+  $Plack::Middleware::Auth::Form::VERSION = '0.006';
 }
 
 use parent qw/Plack::Middleware/;
@@ -141,11 +141,11 @@ sub _logout {
 
 =head1 NAME
 
-Plack::Middleware::Auth::Form - Form Based Authentication for Plack (think CatalystX::SimpleLogin)
+Plack::Middleware::Auth::Form - Form Based Authentication for Plack (think L<CatalystX::SimpleLogin> but on Plack level)
 
 =head1 VERSION
 
-version 0.005
+version 0.006
 
 =head1 SYNOPSIS
 
@@ -157,19 +157,28 @@ version 0.005
 
 =head1 DESCRIPTION
 
-/login - a page with a login form
-/logout - logouts the user (only on a POST) and redirects him to C<after_logout> or C</>.
+=over 4
+
+=item /login 
+
+a page with a login form
+
+=item /logout
+
+logouts the user (only on a POST) and redirects him to C<after_logout> or C</>.
+
+=back
 
 After a succesful login the user is redirected back to url identified by 
 the C<redir_to> session parameter.  It also sets that session parameter from
-$env->{HTTP_REFERER} if it is not set or to C</> if even that is not available.
+C<< $env->{HTTP_REFERER} >> if it is not set or to C</> if even that is not available.
 The username (or id) is saved to C<user_id> session parameter, if you want
 to save an id different from the username - then you need to return
 a hashref from the C<authenticator> callback described below.
 
 If the login page looks too simplistic - the application can take over
 displaying it by setting the C<no_login_page> attribute.  Then 
-the the login form will be saved to C<<$env->{SimpleLoginForm}>>.
+the the login form will be saved to C<< $env->{SimpleLoginForm} >>.
 
 =head1 CONFIGURATION
 
@@ -193,7 +202,7 @@ to be saved in the session instead of the username.
 
 =item no_login_page
 
-Save the login form on C<<$env->{SimpleLoginForm}>> and let the 
+Save the login form on C<< $env->{SimpleLoginForm} >> and let the 
 application display the login page (for a GET request).
 
 =item after_logout
@@ -205,11 +214,16 @@ Where to go after logout, by default '/'.
 =head1 SEE ALSO
 
 L<Plack>
+L<CatalystX::SimpleLogin> 
 
 =head1 ACKNOWLEDGEMENTS
 
 The C<authenticator> code and documentation copied from 
 L<Plack::Middleware::Auth::Basic>.
+
+=head1 CONTRIBUTORS
+
+Tokuhiro Matsuno
 
 =head1 AUTHOR
 
@@ -228,5 +242,5 @@ This is free software, licensed under:
 
 __END__
 
-# ABSTRACT: Form Based Authentication for Plack (think CatalystX::SimpleLogin)
+# ABSTRACT: Form Based Authentication for Plack (think L<CatalystX::SimpleLogin> but on Plack level)
 

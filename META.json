@@ -1,5 +1,5 @@
 {
-   "abstract" : "Form Based Authentication for Plack (think CatalystX::SimpleLogin)",
+   "abstract" : "Form Based Authentication for Plack (think L<CatalystX::SimpleLogin> but on Plack level)",
    "author" : [
       "Zbigniew Lukasiak <zby@cpan.org>"
    ],
@@ -46,6 +46,6 @@
    },
    "release_status" : "stable",
    "resources" : {},
-   "version" : "0.005"
+   "version" : "0.006"
 }
 

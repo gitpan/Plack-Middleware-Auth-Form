@@ -1,5 +1,5 @@
 ---
-abstract: 'Form Based Authentication for Plack (think CatalystX::SimpleLogin)'
+abstract: 'Form Based Authentication for Plack (think L<CatalystX::SimpleLogin> but on Plack level)'
 author:
   - 'Zbigniew Lukasiak <zby@cpan.org>'
 build_requires:
@@ -28,4 +28,4 @@ requires:
   Scalar::Util: 0
   parent: 0
 resources: {}
-version: 0.005
+version: 0.006
