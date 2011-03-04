@@ -12,3 +12,6 @@ Revision history for Plack::Middleware::Auth::Form.
 0.006     2011-03-01
     Docs improvements
 
+0.007     2011-03-04
+    Checking working directory
+
