@@ -29,6 +29,7 @@
       "runtime" : {
          "requires" : {
             "Plack::Middleware" : 0,
+            "Plack::Middleware::Session" : 0,
             "Plack::Request" : 0,
             "Plack::Util::Accessor" : 0,
             "Scalar::Util" : 0,
@@ -37,8 +38,8 @@
       },
       "test" : {
          "requires" : {
-            "Cwd" : 0,
             "Data::Dumper" : 0,
+            "File::Spec" : 0,
             "Test::More" : 0,
             "Test::WWW::Mechanize::PSGI" : 0
          }
@@ -46,6 +47,6 @@
    },
    "release_status" : "stable",
    "resources" : {},
-   "version" : "0.007"
+   "version" : "0.008"
 }
 

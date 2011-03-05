@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package Plack::Middleware::Auth::Form;
 BEGIN {
-  $Plack::Middleware::Auth::Form::VERSION = '0.007';
+  $Plack::Middleware::Auth::Form::VERSION = '0.008';
 }
 
 use parent qw/Plack::Middleware/;
@@ -145,7 +145,7 @@ Plack::Middleware::Auth::Form - Form Based Authentication for Plack (think L<Cat
 
 =head1 VERSION
 
-version 0.007
+version 0.008
 
 =head1 SYNOPSIS
 

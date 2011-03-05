@@ -12,8 +12,8 @@ my %WriteMakefileArgs = (
   'ABSTRACT' => 'Form Based Authentication for Plack (think L<CatalystX::SimpleLogin> but on Plack level)',
   'AUTHOR' => 'Zbigniew Lukasiak <zby@cpan.org>',
   'BUILD_REQUIRES' => {
-    'Cwd' => '0',
     'Data::Dumper' => '0',
+    'File::Spec' => '0',
     'Test::More' => '0',
     'Test::WWW::Mechanize::PSGI' => '0'
   },
@@ -26,12 +26,13 @@ my %WriteMakefileArgs = (
   'NAME' => 'Plack::Middleware::Auth::Form',
   'PREREQ_PM' => {
     'Plack::Middleware' => '0',
+    'Plack::Middleware::Session' => '0',
     'Plack::Request' => '0',
     'Plack::Util::Accessor' => '0',
     'Scalar::Util' => '0',
     'parent' => '0'
   },
-  'VERSION' => '0.007',
+  'VERSION' => '0.008',
   'test' => {
     'TESTS' => 't/*.t'
   }
