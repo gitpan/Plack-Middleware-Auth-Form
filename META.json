@@ -28,6 +28,7 @@
       },
       "runtime" : {
          "requires" : {
+            "Carp" : 0,
             "Plack::Middleware" : 0,
             "Plack::Middleware::Session" : 0,
             "Plack::Request" : 0,
@@ -47,6 +48,6 @@
    },
    "release_status" : "stable",
    "resources" : {},
-   "version" : "0.008"
+   "version" : "0.009"
 }
 

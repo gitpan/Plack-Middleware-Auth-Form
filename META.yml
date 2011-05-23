@@ -22,6 +22,7 @@ no_index:
     - examples
     - extensions
 requires:
+  Carp: 0
   Plack::Middleware: 0
   Plack::Middleware::Session: 0
   Plack::Request: 0
@@ -29,4 +30,4 @@ requires:
   Scalar::Util: 0
   parent: 0
 resources: {}
-version: 0.008
+version: 0.009

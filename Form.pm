@@ -1,16 +1,12 @@
 use strict;
 use warnings;
 package Plack::Middleware::Auth::Form;
-BEGIN {
-  $Plack::Middleware::Auth::Form::VERSION = '0.009';
-}
 
 use parent qw/Plack::Middleware/;
 use Plack::Util::Accessor qw( secure authenticator no_login_page after_logout );
 use Plack::Request;
 use Scalar::Util;
 use Carp ();
-
 
 sub prepare_app {
     my $self = shift;
@@ -51,7 +47,7 @@ sub _login {
         my $secure_url = "https://$server" . $env->{PATH_INFO};
         return [ 
             301, 
-            [ Location => $secure_url ],
+            [ Location => $secure_url ], 
             [ "<html><body><a href=\"$secure_url\">Need a secure connection</a></body></html>" ]
         ];
     }
@@ -78,7 +74,7 @@ sub _login {
                 URI->new( $redir_to )->path eq $env->{PATH_INFO};
             return [ 
                 302, 
-                [ Location => $redir_to ],
+                [ Location => $redir_to ], 
                 [ "<html><body><a href=\"$redir_to\">Back</a></body></html>" ]
             ];
         }
@@ -90,7 +86,7 @@ sub _login {
         redir_to => $env->{'psgix.session'}{redir_to},
     );
     if( $self->no_login_page ){
-        $env->{'Plack::Middleware::Auth::Form.LoginForm'} = $form;
+        $env->{SimpleLoginForm} = $form;
         return $self->app->( $env );
     }
     else{
@@ -130,24 +126,16 @@ sub _logout {
     }
     return [ 
         303, 
-        [ Location => $self->after_logout || '/' ],
+        [ Location => $self->after_logout || '/' ], 
         [ "<html><body><a href=\"/\">Home</a></body></html>" ]
     ];
 }
 
 1;
 
+__END__
 
-
-=pod
-
-=head1 NAME
-
-Plack::Middleware::Auth::Form - Form Based Authentication for Plack (think L<CatalystX::SimpleLogin> but on Plack level)
-
-=head1 VERSION
-
-version 0.009
+# ABSTRACT: Form Based Authentication for Plack (think L<CatalystX::SimpleLogin> but on Plack level)
 
 =head1 SYNOPSIS
 
@@ -180,8 +168,7 @@ a hashref from the C<authenticator> callback described below.
 
 If the login page looks too simplistic - the application can take over
 displaying it by setting the C<no_login_page> attribute.  Then 
-the the login form will be saved to 
-C<< $env->{'Plack::Middleware::Auth::Form.LoginForm'} >>.
+the the login form will be saved to C<< $env->{SimpleLoginForm} >>.
 
 =head1 CONFIGURATION
 
@@ -205,8 +192,7 @@ to be saved in the session instead of the username.
 
 =item no_login_page
 
-Save the login form on C<< $env->{'Plack::Middleware::Auth::Form.LoginForm'} >> 
-and let the 
+Save the login form on C<< $env->{SimpleLoginForm} >> and let the 
 application display the login page (for a GET request).
 
 =item after_logout
@@ -229,22 +215,4 @@ L<Plack::Middleware::Auth::Basic>.
 
 Tokuhiro Matsuno
 
-=head1 AUTHOR
-
-Zbigniew Lukasiak <zby@cpan.org>
-
-=head1 COPYRIGHT AND LICENSE
-
-This software is Copyright (c) 2011 by Zbigniew Lukasiak <zby@cpan.org>.
-
-This is free software, licensed under:
-
-  The Artistic License 2.0 (GPL Compatible)
-
 =cut
-
-
-__END__
-
-# ABSTRACT: Form Based Authentication for Plack (think L<CatalystX::SimpleLogin> but on Plack level)
-

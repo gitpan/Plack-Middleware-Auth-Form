@@ -15,3 +15,9 @@ Revision history for Plack::Middleware::Auth::Form.
 0.008     2011-03-05
     Some prerequisites added
 
+0.009     2011-05-23
+    More compliance with the PSGI spec:
+    Prefix for login form snippet is now 'Plack::Middleware::Auth::Form.LoginForm'
+    HTTP headers are now array reference (tokuhirom)
+
+

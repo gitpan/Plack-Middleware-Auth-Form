@@ -25,6 +25,7 @@ my %WriteMakefileArgs = (
   'LICENSE' => 'artistic_2',
   'NAME' => 'Plack::Middleware::Auth::Form',
   'PREREQ_PM' => {
+    'Carp' => '0',
     'Plack::Middleware' => '0',
     'Plack::Middleware::Session' => '0',
     'Plack::Request' => '0',
@@ -32,7 +33,7 @@ my %WriteMakefileArgs = (
     'Scalar::Util' => '0',
     'parent' => '0'
   },
-  'VERSION' => '0.008',
+  'VERSION' => '0.009',
   'test' => {
     'TESTS' => 't/*.t'
   }
