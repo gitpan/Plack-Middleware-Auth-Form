@@ -2,11 +2,11 @@ use strict;
 use warnings;
 package Plack::Middleware::Auth::Form;
 BEGIN {
-  $Plack::Middleware::Auth::Form::VERSION = '0.009';
+  $Plack::Middleware::Auth::Form::VERSION = '0.010';
 }
 
 use parent qw/Plack::Middleware/;
-use Plack::Util::Accessor qw( secure authenticator no_login_page after_logout );
+use Plack::Util::Accessor qw( secure authenticator no_login_page after_logout ssl_port );
 use Plack::Request;
 use Scalar::Util;
 use Carp ();
@@ -46,13 +46,16 @@ sub call {
 sub _login {
     my($self, $env) = @_;
     my $login_error;
-    if( $self->secure && $env->{'psgi.url_scheme'} ne 'https' ){
-        my $server = $env->{X_FORWARDED_FOR} || $env->{X_HTTP_HOST} || $env->{SERVER_NAME};
-        my $secure_url = "https://$server" . $env->{PATH_INFO};
+    if( $self->secure 
+        && ( !defined $env->{'psgi.url_scheme'} || lc $env->{'psgi.url_scheme'} ne 'https' )
+        && ( !defined $env->{HTTP_X_FORWARDED_PROTO} || lc $env->{HTTP_X_FORWARDED_PROTO} ne 'https' )
+    ){
+        my $server = $env->{HTTP_X_FORWARDED_FOR} || $env->{HTTP_X_HOST} || $env->{SERVER_NAME};
+        my $secure_url = "https://$server" . ( $self->ssl_port ? ':' . $self->ssl_port : '' ) . $env->{PATH_INFO};
         return [ 
             301, 
             [ Location => $secure_url ],
-            [ "<html><body><a href=\"$secure_url\">Need a secure connection</a></body></html>" ]
+            [ $self->_wrap_body( "<a href=\"$secure_url\">Need a secure connection</a>" ) ]
         ];
     }
     my $params = Plack::Request->new( $env )->parameters;
@@ -79,7 +82,7 @@ sub _login {
             return [ 
                 302, 
                 [ Location => $redir_to ],
-                [ "<html><body><a href=\"$redir_to\">Back</a></body></html>" ]
+                [ $self->_wrap_body( "<a href=\"$redir_to\">Back</a>" ) ]
             ];
         }
     }
@@ -97,7 +100,7 @@ sub _login {
          return [ 
             200, 
             [ 'Content-Type' => 'text/html', ],
-            [ "<html><body>$form\nAfter login: $env->{'psgix.session'}{redir_to}</body></html>" ]
+            [ $self->_wrap_body( "$form\nAfter login: $env->{'psgix.session'}{redir_to}" ) ]
         ];
     }
 }
@@ -131,8 +134,15 @@ sub _logout {
     return [ 
         303, 
         [ Location => $self->after_logout || '/' ],
-        [ "<html><body><a href=\"/\">Home</a></body></html>" ]
+        [ $self->_wrap_body( "<a href=\"/\">Home</a>") ]
     ];
+}
+
+# this is experimental
+sub _wrap_body {
+    my($self, $content) = @_;
+
+    return "<html><body>$content</body></html>";
 }
 
 1;
@@ -147,7 +157,7 @@ Plack::Middleware::Auth::Form - Form Based Authentication for Plack (think L<Cat
 
 =head1 VERSION
 
-version 0.009
+version 0.010
 
 =head1 SYNOPSIS
 
@@ -212,6 +222,14 @@ application display the login page (for a GET request).
 =item after_logout
 
 Where to go after logout, by default '/'.
+
+=item secure
+
+Make the login form redirect to https if requested with http.
+
+=item ssl_port
+
+The port for the https requests.
 
 =back
 

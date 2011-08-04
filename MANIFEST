@@ -1,5 +1,4 @@
 Changes
-Form.pm
 INSTALL
 LICENSE
 MANIFEST
@@ -16,3 +15,4 @@ t/release-kwalitee.t
 t/release-pod-coverage.t
 t/release-pod-syntax.t
 t/unit.t
+t/wrap_body_override.t
