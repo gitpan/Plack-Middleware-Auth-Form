@@ -4,7 +4,7 @@
       "Zbigniew Lukasiak <zby@cpan.org>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 4.200006, CPAN::Meta::Converter version 2.110440",
+   "generated_by" : "Dist::Zilla version 4.200006, CPAN::Meta::Converter version 2.110930001",
    "license" : [
       "artistic_2"
    ],
@@ -48,6 +48,6 @@
    },
    "release_status" : "stable",
    "resources" : {},
-   "version" : "0.010"
+   "version" : "0.011"
 }
 
