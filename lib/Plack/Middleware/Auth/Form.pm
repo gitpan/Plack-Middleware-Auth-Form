@@ -1,8 +1,8 @@
 use strict;
 use warnings;
 package Plack::Middleware::Auth::Form;
-BEGIN {
-  $Plack::Middleware::Auth::Form::VERSION = '0.011';
+{
+  $Plack::Middleware::Auth::Form::VERSION = '0.012';
 }
 
 use parent qw/Plack::Middleware/;
@@ -140,6 +140,7 @@ END
 sub _logout {
     my($self, $env) = @_;
     if( $env->{REQUEST_METHOD} eq 'POST' ){
+        $self->_logout_hook( $env->{'psgix.session'}{user_id}, $env );
         delete $env->{'psgix.session'}{user_id};
         delete $env->{'psgix.session'}{remember};
     }
@@ -150,7 +151,8 @@ sub _logout {
     ];
 }
 
-# this is experimental
+sub _logout_hook {}
+
 sub _wrap_body {
     my($self, $content) = @_;
 
@@ -165,11 +167,11 @@ sub _wrap_body {
 
 =head1 NAME
 
-Plack::Middleware::Auth::Form - Form Based Authentication for Plack (think L<CatalystX::SimpleLogin> but on Plack level)
+Plack::Middleware::Auth::Form
 
 =head1 VERSION
 
-version 0.011
+version 0.012
 
 =head1 SYNOPSIS
 
@@ -270,6 +272,7 @@ chromatic
 hayajo
 Kaare Rasmussen
 Oliver Paukstadt
+G. Paul Ziemba
 
 =head1 AUTHOR
 

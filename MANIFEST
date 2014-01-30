@@ -11,6 +11,7 @@ app.psgi
 dist.ini
 lib/Plack/Middleware/Auth/Form.pm
 main.t
+patch-Form.pm
 t/app.psgi
 t/main.t
 t/release-kwalitee.t

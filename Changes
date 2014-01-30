@@ -32,4 +32,8 @@ Revision history for Plack::Middleware::Auth::Form.
     logging out after a failed login (suggested in https://rt.cpan.org/Ticket/Display.html?id=75899)
     keeping the 'Expires' on the cookie (https://rt.cpan.org/Public/Bug/Display.html?id=75896)
 
+0.012     2014-01-30
+    _logout_hook (suggested by G. Paul Ziemba)
+    fix PSGI spec compliance in t/app.psgi (ilmari)
+    validate request/response with Plack::Middleware::Lint (Tokuhiro Matsuno <tokuhirom@gmail.com>)
 
